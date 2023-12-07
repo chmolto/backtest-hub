@@ -1,0 +1,13 @@
+package com.example.backtesthub;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BacktestHubApplication{
+
+    public static void main(String[] args){
+        SpringApplication.run(BacktestHubApplication.class, args);
+    }
+
+}
