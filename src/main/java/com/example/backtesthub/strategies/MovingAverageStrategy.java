@@ -9,16 +9,12 @@ public class MovingAverageStrategy implements TradingStrategy{
     private int shortTermPeriod;
     private int longTermPeriod;
     private double riskPerTrade;  // A fixed percentage of trading capital to risk per trade
-    private double takeProfitMultiplier;  // A multiplier for take-profit orders
-    private double stopLossMultiplier;  // A multiplier for stop-loss orders
 
     public MovingAverageStrategy(int shortTermPeriod, int longTermPeriod,
-                                 double riskPerTrade, double takeProfitMultiplier, double stopLossMultiplier){
+                                 double riskPerTrade){
         this.shortTermPeriod = shortTermPeriod;
         this.longTermPeriod = longTermPeriod;
         this.riskPerTrade = riskPerTrade;
-        this.takeProfitMultiplier = takeProfitMultiplier;
-        this.stopLossMultiplier = stopLossMultiplier;
     }
 
     @Override
@@ -83,14 +79,6 @@ public class MovingAverageStrategy implements TradingStrategy{
         }
 
         return sum / historicalData.size();
-    }
-
-    public double getTakeProfitPrice(double entryPrice){
-        return entryPrice * (1 + takeProfitMultiplier);
-    }
-
-    public double getStopLossPrice(double entryPrice){
-        return entryPrice * (1 - stopLossMultiplier);
     }
 
 }
