@@ -1,5 +1,7 @@
 # Trading Strategy Evaluation and Profitability Calculator 💹
 
+[![Project Image](https://ibb.co/R3zxXts)](https://ibb.co/R3zxXts)
+
 ## Overview
 
 A comprehensive trading strategy evaluation and profitability calculator tool for backtesting different trading strategies and assessing their performance in various setups. This repository provides a set of tools and documentation to help you analyze and optimize your trading strategies.
@@ -20,16 +22,6 @@ A comprehensive trading strategy evaluation and profitability calculator tool fo
 4. Analyze the performance metrics and make necessary adjustments to your strategy.
 
 For detailed usage instructions and examples, check out the [User Guide](docs/user-guide.md).
-
-## Examples
-
-![Example Chart 1](example_images/chart1.png)
-*Performance chart for Strategy A in a Bull Market*
-
-![Example Chart 2](example_images/chart2.png)
-*Performance chart for Strategy B in a Bear Market*
-
-For more examples and in-depth analysis, see the [Examples](examples/) directory.
 
 ## Contributing
 
