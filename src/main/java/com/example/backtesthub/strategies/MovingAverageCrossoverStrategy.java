@@ -22,8 +22,13 @@ public class MovingAverageCrossoverStrategy implements TradingStrategy {
 
         int lastIndex = shortTermMA.size() - 1;
 
-        // Buy signal when the short-term moving average crosses above the long-term moving average
-        return shortTermMA.get(lastIndex) > longTermMA.get(lastIndex - 1) && shortTermMA.get(lastIndex - 1) <= longTermMA.get(lastIndex - 2);
+        // Ensure there are enough elements before accessing
+        if (lastIndex >= 2 && lastIndex - 1 < longTermMA.size() && lastIndex - 2 < longTermMA.size()) {
+            // Buy signal when the short-term moving average crosses above the long-term moving average
+            return shortTermMA.get(lastIndex) > longTermMA.get(lastIndex - 1) && shortTermMA.get(lastIndex - 1) <= longTermMA.get(lastIndex - 2);
+        } else {
+            return false; // Not enough elements to make a decision
+        }
     }
 
     @Override
@@ -37,8 +42,13 @@ public class MovingAverageCrossoverStrategy implements TradingStrategy {
 
         int lastIndex = shortTermMA.size() - 1;
 
-        // Sell signal when the short-term moving average crosses below the long-term moving average
-        return shortTermMA.get(lastIndex) < longTermMA.get(lastIndex - 1) && shortTermMA.get(lastIndex - 1) >= longTermMA.get(lastIndex - 2);
+        // Ensure there are enough elements before accessing
+        if (lastIndex >= 2 && lastIndex - 1 < longTermMA.size() && lastIndex - 2 < longTermMA.size()) {
+            // Sell signal when the short-term moving average crosses below the long-term moving average
+            return shortTermMA.get(lastIndex) < longTermMA.get(lastIndex - 1) && shortTermMA.get(lastIndex - 1) >= longTermMA.get(lastIndex - 2);
+        } else {
+            return false; // Not enough elements to make a decision
+        }
     }
 
     private List<Double> calculateMovingAverage(List<CoinAPIResponse> data, int period) {

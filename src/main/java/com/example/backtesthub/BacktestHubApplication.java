@@ -1,5 +1,6 @@
 package com.example.backtesthub;
 
+import com.example.backtesthub.charts.SMACrossoverChart;
 import com.example.backtesthub.models.CoinAPIRequest;
 import com.example.backtesthub.models.CoinAPIResponse;
 import com.example.backtesthub.service.CoinAPIService;
@@ -9,7 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,19 +26,25 @@ public class BacktestHubApplication{
     @Bean
     public CommandLineRunner executeCoinAPIService(CoinAPIService coinAPIService){
         return args -> {
-            CoinAPIRequest request = new CoinAPIRequest("COINBASE_SPOT_BTC_USD", "5MIN", LocalDateTime.now().minusDays(7), LocalDateTime.now(), 1000, false);
+            CoinAPIRequest request = new CoinAPIRequest("COINBASE_SPOT_BTC_USD", "1DAY", null, null, 10000, false);
             List<CoinAPIResponse> historicalData = coinAPIService.getHistoricalData(request);
             List<TradingStrategy> strategies = new ArrayList<>();
 
-            strategies.add(new MovingAverageStrategy(20, 50, 1.5));
+           /* strategies.add(new MovingAverageStrategy(20, 50, 1.5));
             strategies.add(new RSIStrategy());
             strategies.add(new MACDStrategy());
             strategies.add(new BollingerBandsStrategy());
-            strategies.add(new MovingAverageCrossoverStrategy());
+            strategies.add(new MovingAverageCrossoverStrategy()); */
+            //strategies.add(new CombinedFactorStrategy());
+            //strategies.add(new SMACrossoverStrategy(12, 56));
 
-            for(TradingStrategy strategy : strategies){
+            /* for(TradingStrategy strategy : strategies){
+                System.out.println("Executing strategy: " + strategy.getClass().getSimpleName());
                 executeStrategy(strategy, historicalData);
-            }
+            } */
+
+            SMACrossoverChart smaCrossoverChart = new SMACrossoverChart();
+            smaCrossoverChart.generateAndSaveChart(historicalData, new SMACrossoverStrategy(12, 56), "SMACrossoverChart.png");
         };
     }
 

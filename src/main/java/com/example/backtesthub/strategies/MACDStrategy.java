@@ -61,23 +61,34 @@ public class MACDStrategy implements TradingStrategy {
         double sum = historicalData.get(index).getPriceClose();
 
         for (int i = 1; i < period; i++) {
-            sum += historicalData.get(index - i).getPriceClose() * Math.pow(1 - multiplier, i);
+            int previousIndex = index - i;
+            if (previousIndex >= 0) {
+                sum += historicalData.get(previousIndex).getPriceClose() * Math.pow(1 - multiplier, i);
+            }
         }
 
         return sum * multiplier;
     }
 
     private double calculateMACDLine() {
-        int lastIndex = shortTermEMAValues.size() - 1;
-        return shortTermEMAValues.get(lastIndex) - longTermEMAValues.get(lastIndex);
+        int shortTermSize = shortTermEMAValues.size();
+        int longTermSize = longTermEMAValues.size();
+
+        if (shortTermSize > 0 && longTermSize > 0) {
+            return shortTermEMAValues.get(shortTermSize - 1) - longTermEMAValues.get(longTermSize - 1);
+        } else {
+            return 0.0;
+        }
     }
 
     private double calculateSignalLine() {
-        if (shortTermEMAValues.size() >= SIGNAL_PERIOD) {
-            List<Double> macdValues = shortTermEMAValues.subList(shortTermEMAValues.size() - SIGNAL_PERIOD, shortTermEMAValues.size());
+        int shortTermSize = shortTermEMAValues.size();
+
+        if (shortTermSize >= SIGNAL_PERIOD) {
+            List<Double> macdValues = shortTermEMAValues.subList(shortTermSize - SIGNAL_PERIOD, shortTermSize);
             return calculateSimpleMovingAverage(macdValues);
         } else {
-            return 0.0; // Default to 0 if there are not enough MACD values for the Signal Line
+            return 0.0;
         }
     }
 
