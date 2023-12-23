@@ -26,10 +26,11 @@ public class CoinAPIService {
 
     private static final String DATA_FILE_PATH = "historical_data.json";
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
-    public CoinAPIService(WebClient.Builder webClientBuilder) {
+    public CoinAPIService(WebClient.Builder webClientBuilder, ObjectMapper objectMapper) {
         this.webClientBuilder = webClientBuilder;
+        this.objectMapper = objectMapper;
     }
 
     public List<CoinAPIResponse> getHistoricalData(CoinAPIRequest request) {
@@ -55,7 +56,6 @@ public class CoinAPIService {
 
     private void saveHistoricalDataToFile(List<CoinAPIResponse> historicalData) {
         try {
-            objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
             objectMapper.writeValue(new File(DATA_FILE_PATH), historicalData);
         } catch (IOException e) {
             e.printStackTrace();

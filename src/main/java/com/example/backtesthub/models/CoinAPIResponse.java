@@ -5,25 +5,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
 public class CoinAPIResponse {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSX");
-
     @JsonAlias("time_period_start")
-    private String timePeriodStart;
+    private LocalDateTime timePeriodStart;
 
     @JsonAlias("time_period_end")
-    private String timePeriodEnd;
+    private LocalDateTime timePeriodEnd;
 
     @JsonAlias("time_open")
-    private String timeOpen;
+    private LocalDateTime timeOpen;
 
     @JsonAlias("time_close")
-    private String timeClose;
+    private LocalDateTime timeClose;
 
     @JsonAlias("price_open")
     private Double priceOpen;
@@ -42,21 +39,5 @@ public class CoinAPIResponse {
 
     @JsonAlias("trades_count")
     private Long tradesCount;
-
-    public LocalDateTime getTimePeriodStart() {
-        return LocalDateTime.parse(timePeriodStart, DATE_TIME_FORMATTER);
-    }
-
-    public LocalDateTime getTimePeriodEnd() {
-        return LocalDateTime.parse(timePeriodEnd, DATE_TIME_FORMATTER);
-    }
-
-    public LocalDateTime getTimeOpen() {
-        return LocalDateTime.parse(timeOpen, DATE_TIME_FORMATTER);
-    }
-
-    public LocalDateTime getTimeClose() {
-        return LocalDateTime.parse(timeClose, DATE_TIME_FORMATTER);
-    }
 
 }
