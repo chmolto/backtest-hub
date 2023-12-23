@@ -1,6 +1,6 @@
 # Trading Strategy Evaluation and Profitability Calculator 💹
 
-[![Project Image](https://ibb.co/R3zxXts)](https://ibb.co/R3zxXts)
+[![Project Image](https://i.ibb.co/Pcw72JP/SMACrossover-Chart.png)](https://i.ibb.co/Pcw72JP/SMACrossover-Chart.png)
 
 ## Overview
 
